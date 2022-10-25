@@ -32,12 +32,28 @@ router.post("/register", (req, res) => {
 
 })
 
+
+router.post("/update-user", (req, res) => {
+    const HashedPassword = bcrypt.hashSync(req.body.password, 10);
+    UserModel.findByIdAndUpdate(req.body.id, {
+        username: req.body.username,
+        email: req.body.email,
+        password: HashedPassword,
+        tp: req.body.tp,
+    }, (err, docs) => {
+        if(err){
+            res.status(400).json({msg: "Error occurred"})
+        }else{
+            res.status(200).json({status:"Updated"})
+        }
+    })
+})
+
 router.get("/login-failed", (req, res) => {
     res.status(400).send("Login-Failed")
 })
 
 router.post("/delete-user", (req, res) => {
-    console.log(req.body);
     UserModel.findByIdAndDelete(req.body.id, (err, docs) => {
         if(err){
             res.status(400).json({msg: "Error occurred"})
@@ -97,5 +113,9 @@ router.get("/logout", (req, res) => {
 
     })
 })
+
+router.post("/update-user", (req, res) => {
+
+});
 
 module.exports = router;

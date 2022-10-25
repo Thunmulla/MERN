@@ -12,6 +12,7 @@ import {EditSeller} from "./pages/EditSeller";
 import {SellerPage} from "./pages/SellerPage";
 import {EditPost} from "./pages/EditPost.jsx";
 import {IsLoggedIn} from "./Script/Auth.jsx";
+import {UserProfile} from "./pages/UserProfile.jsx";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -41,6 +42,7 @@ function App() {
             <Route path="/detail" element={<PostDisplay/>}/>
             <Route path="/edit-seller" element={<EditSeller/>}/>
             <Route path="/create-post" element={<CreatePost/>}/>
+            <Route path="/edit-account" element={<UserProfile/>}/>
             <Route path="/edit-post" element={<EditPost/>}/>
             <Route exact path="*" element={<Home/>}/>
         </Routes>

@@ -38,6 +38,32 @@ export function NavBar() {
         })
     }
 
+    function EditProfile() {
+        navigate("/edit-account")
+    }
+
+    function DeleteProfile() {
+        const user = JSON.parse(sessionStorage.getItem("user"));
+        axios.post('http://localhost:3001/user/delete-user', {
+            id: user.id
+        }).then(res => {
+            if (res) {
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'You have successfully Deleted Your Account!',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        LogOut();
+                    } else if (result.isDismissed) {
+                        LogOut();
+                    }
+                })
+            }
+        })
+    }
+
     return (
         <div>
             <Navbar bg="dark" variant="dark">
@@ -52,7 +78,9 @@ export function NavBar() {
                     <Nav>
                         <Navbar.Brand hidden={IsLoggedIn()} href="/login"><Button variant={"primary"}>LogIn</Button></Navbar.Brand>
                         <Navbar.Brand hidden={IsLoggedIn()} href="/sign-up"><Button variant={"success"}>Sign Up</Button></Navbar.Brand>
-                        <Navbar.Brand hidden={!IsLoggedIn()} onClick={LogOut}><Button variant={"outline-danger"}>Log Out</Button></Navbar.Brand>
+                        <Navbar.Brand hidden={!IsLoggedIn()} onClick={LogOut}><Button variant={"outline-success"}>Log Out</Button></Navbar.Brand>
+                        <Navbar.Brand hidden={!IsLoggedIn()} onClick={EditProfile}><Button variant={"outline-primary"}>Edit Profile</Button></Navbar.Brand>
+                        <Navbar.Brand hidden={!IsLoggedIn()} onClick={DeleteProfile}><Button variant={"outline-danger"}>Delete Profile</Button></Navbar.Brand>
                     </Nav>
                 </Container>
             </Navbar>

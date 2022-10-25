@@ -57,7 +57,7 @@ export function EditSeller() {
     return (
 
         <div className="d-flex flex-column px-5 ">
-            <h1 className={"my-3"}>Register</h1>
+            <h1 className={"my-3"}>Edit Seller</h1>
             <Form>
                 <FloatingLabel
                     controlId="floatingInputUserName"
