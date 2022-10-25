@@ -24,6 +24,7 @@ let connection = mongoose.client.then((client) => {
         store: new MongoStore(options),
     }))
 
+
 App.use(passport.initialize(undefined))
 App.use(passport.session(undefined))
 passport.serializeUser(function (user, done) {
@@ -36,7 +37,6 @@ passport.deserializeUser(async function (id, done) {
 })
 //Use the express router
 const LocalStrategy = passportLocal.Strategy
-console.log()
 passport.use("local", new LocalStrategy({}, function (username, password, done) {
     mongoose.connection.db.collection("users").findOne({username: username}, async function (err, user) {
             if (err) return done(err)
