@@ -41,7 +41,7 @@ export function EditSeller() {
                 confirmButtonText: 'Ok'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    navigator("/login");
+                    navigator("/");
                 }
             })
         }).catch((err) => {

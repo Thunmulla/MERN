@@ -1,25 +1,25 @@
 const IsAdmin=()=>{
-    if(JSON.parse(sessionStorage.getItem("users")) === null) {
+    if(JSON.parse(sessionStorage.getItem("user")) === null) {
         return false;
     }else{
-        return JSON.parse(sessionStorage.getItem("users")).role !== "admin";
+        return JSON.parse(sessionStorage.getItem("user")).role === "admin";
     }
 
 }
 
 const IsSeller=()=>{
-    if(JSON.parse(sessionStorage.getItem("users")) === null) {
+    if(JSON.parse(sessionStorage.getItem("user")) === null) {
         return false;
     }else{
-        return JSON.parse(sessionStorage.getItem("users")).role !== "seller";
+        return JSON.parse(sessionStorage.getItem("user")).role === "seller";
     }
 }
 
 const IsLoggedIn=()=>{
-    if(JSON.parse(sessionStorage.getItem("users")) === null) {
+    if(JSON.parse(sessionStorage.getItem("user")) === null) {
         return false;
     }else{
-        return JSON.parse(sessionStorage.getItem("users")).username !== "";
+        return JSON.parse(sessionStorage.getItem("user")).username !== "";
     }
 }
 

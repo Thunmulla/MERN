@@ -20,6 +20,7 @@ export function LogIn() {
             if(res.status===200){
                 sessionStorage.setItem("user",JSON.stringify(res.data.user))
                 navigator('/')
+                window.location.reload()
             }else{
                 Swal.fire({
                     title: 'Error!',

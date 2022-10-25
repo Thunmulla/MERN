@@ -3,6 +3,7 @@ import {Button, Card, Col, Row} from "react-bootstrap";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import Swal from "sweetalert2";
+import {IsAdmin} from "../Script/Auth.jsx";
 
 
 
@@ -10,6 +11,9 @@ export function AdminPage(){
     const [sellers,setSellers]=useState([]);
     const navigator=useNavigate();
     useEffect(()=>{
+        if(!IsAdmin()){
+            navigator("/");
+        }
         axios.get('http://localhost:3001/user/getSellers').then(res => {
             if(res.data){
                 setSellers(res.data.data)

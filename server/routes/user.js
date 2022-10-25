@@ -87,4 +87,15 @@ router.post("/login", passport.authenticate("local",{
     res.status(200).json({status:"Logged in",user:req.user})
 })
 
+router.get("/logout", (req, res) => {
+    req.logout((err)=>{
+       if (err){
+           console.log(err)
+       }else {
+           res.status(200).json({status:"Logged out"})
+       }
+
+    })
+})
+
 module.exports = router;

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import {useEffect, useState} from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 import {Route,Routes} from 'react-router-dom'
@@ -9,12 +9,27 @@ import {CreatePost} from "./pages/CreatePost";
 import {LogIn} from "./pages/LogIn";
 import {AdminPage} from "./pages/AdminPage";
 import {EditSeller} from "./pages/EditSeller";
+import {SellerPage} from "./pages/SellerPage";
+import {EditPost} from "./pages/EditPost.jsx";
+import {IsLoggedIn} from "./Script/Auth.jsx";
 
 function App() {
   const [count, setCount] = useState(0)
     console.log(count)
+    useEffect(()=>{
+        if(window.location.pathname==='/login' || window.location.pathname==='/signup'){
+            if(IsLoggedIn()){
+                window.location.href='/'
+            }
+        }else{
+            if(!IsLoggedIn()){
+                window.location.href='/login'
+            }
+        }
+    },[])
 
-  return (<div>
+  return (
+      <div>
 
     <div className="App d-flex justify-content-center align-items-center">
         <Routes>
@@ -22,9 +37,11 @@ function App() {
             <Route path="/sign-up" element={<SignUp/>}/>
             <Route path="/login" element={<LogIn/>}/>
             <Route path="/admin" element={<AdminPage/>}/>
+            <Route path="/seller" element={<SellerPage/>}/>
             <Route path="/detail" element={<PostDisplay/>}/>
             <Route path="/edit-seller" element={<EditSeller/>}/>
             <Route path="/create-post" element={<CreatePost/>}/>
+            <Route path="/edit-post" element={<EditPost/>}/>
             <Route exact path="*" element={<Home/>}/>
         </Routes>
 

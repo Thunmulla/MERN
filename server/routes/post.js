@@ -20,6 +20,40 @@ router.get('/', (req, res) => {
     }
 });
 
+router.post('/getSinglePost', (req, res) => {
+    const id= req.body.id;
+    PostModel.findById(id, (err, docs) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(docs);
+        }
+    })
+});
+
+router.post("/update-post", (req, res) => {
+    const id= req.body.id;
+    const name= req.body.name;
+    const description= req.body.description;
+    PostModel.findByIdAndUpdate(id, {
+        name: name,
+        description: description,
+    }, (err, docs) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(docs);
+        }
+    })
+})
+
+router.post("/getPostsBySellerId", (req, res) => {
+    const sellerId = req.body.id;
+    PostModel.find({ user:sellerId }, (err, data) => {
+        res.json(data);
+    });
+})
+
 router.post('/getPost', (req, res) => {
     const id= req.body.id;
     PostModel.find({_id:id}, (err, docs) => {
