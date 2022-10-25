@@ -13,6 +13,7 @@ router.post('/save', (req, res) => {
         name: data.name,
         description: data.description,
         price: data.price,
+        user:data.user
     });
     const newPet = new PetModel({
         _id:id,

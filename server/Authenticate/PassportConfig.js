@@ -31,14 +31,14 @@ passport.serializeUser(function (user, done) {
     done(null, user._id)
 })
 passport.deserializeUser(async function (id, done) {
-    const result = await Database.findById("users", id)
+    const result = await mongoose.Database.collection("users").findById("users", id)
     if (result) done(null, result)
     else done(null, false)
 })
 //Use the express router
 const LocalStrategy = passportLocal.Strategy
 passport.use("local", new LocalStrategy({}, function (username, password, done) {
-    mongoose.connection.db.collection("users").findOne({username: username}, async function (err, user) {
+    mongoose.Database.collection("users").findOne({username: username}, async function (err, user) {
             if (err) return done(err)
             if (!user) return done(null, false, {message: 'Incorrect username'})
             bcrypt.compare(password, user.password, function (err, res) {

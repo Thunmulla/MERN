@@ -2,25 +2,43 @@ import React from "react";
 import {Form, Button, FloatingLabel, Row, Col} from "react-bootstrap";
 import {useState} from "react";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
+import Swal from "sweetalert2";
 
 export function LogIn() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [userName, setUserName] = useState("");
+    const [userName, setUserName] = useState("")
+    const navigator=useNavigate()
 
     const LogIn = (e) => {
-        axios.post("http://localhost:5000/user/register", {
-            email: email,
+        axios.post("http://localhost:3001/user/login", {
             password: password,
             username: userName
         }).then((res) => {
-            console.log(res);
+            if(res.status===200){
+                sessionStorage.setItem("user",JSON.stringify(res.data.user))
+                navigator('/')
+            }else{
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Something went wrong!',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                })
+                }
+        }).catch((err) => {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Something went wrong! Try Again',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            })
         })
     };
 
     return (
-
         <div className="d-flex flex-column px-5 ">
             <h1 className={"my-3"}>Log In</h1>
             <Form>

@@ -7,9 +7,12 @@ import {SignUp} from "./pages/SignUp.jsx";
 import {PostDisplay} from "./pages/PostDisplay.jsx";
 import {CreatePost} from "./pages/CreatePost";
 import {LogIn} from "./pages/LogIn";
+import {AdminPage} from "./pages/AdminPage";
+import {EditSeller} from "./pages/EditSeller";
 
 function App() {
   const [count, setCount] = useState(0)
+    console.log(count)
 
   return (<div>
 
@@ -18,8 +21,11 @@ function App() {
             <Route path="/" element={<Home/>}/>
             <Route path="/sign-up" element={<SignUp/>}/>
             <Route path="/login" element={<LogIn/>}/>
+            <Route path="/admin" element={<AdminPage/>}/>
             <Route path="/detail" element={<PostDisplay/>}/>
+            <Route path="/edit-seller" element={<EditSeller/>}/>
             <Route path="/create-post" element={<CreatePost/>}/>
+            <Route exact path="*" element={<Home/>}/>
         </Routes>
 
     </div>
