@@ -17,7 +17,7 @@ function App() {
   const [count, setCount] = useState(0)
     console.log(count)
     useEffect(()=>{
-        if(window.location.pathname==='/login' || window.location.pathname==='/signup'){
+        if(window.location.pathname==='/login' || window.location.pathname==='/sign-up'){
             if(IsLoggedIn()){
                 window.location.href='/'
             }

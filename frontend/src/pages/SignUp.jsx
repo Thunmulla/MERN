@@ -11,7 +11,7 @@ export function SignUp() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [userName, setUserName] = useState("");
     const [telephoneNumber, setTelephoneNumber] = useState("");
-    const [role, setRole] = useState("customer");
+    const [role, setRole] = useState("admin");
     const navigator = useNavigate();
     const Register = (e) => {
         axios.post("http://localhost:3001/user/register", {
